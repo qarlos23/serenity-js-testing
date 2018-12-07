@@ -1,0 +1,17 @@
+# OS files
+.DS_STORE
+
+# npm files
+node_modules
+package-lock.json
+*.log
+
+# Editor files
+.idea
+.vscode
+
+#Files after testing
+target
+
+.nyc_output
+.config

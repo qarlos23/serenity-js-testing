@@ -1,0 +1,35 @@
+{
+  "name": "serenity-js-testing",
+  "version": "1.0.0",
+  "description": "project to try out serenity",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "e2e": "webdriver-manager update && protractor ./protractor.conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qarlos23/serenity-js-testing.git"
+  },
+  "author": "Carlos",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/qarlos23/serenity-js-testing/issues"
+  },
+  "homepage": "https://github.com/qarlos23/serenity-js-testing#readme",
+  "devDependencies": {
+    "@types/chai": "^4.1.6",
+    "@types/chai-as-promised": "^7.1.0",
+    "@types/cucumber": "^4.0.4",
+    "@types/node": "^10.12.0",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "chai-smoothie": "^0.3.2",
+    "cucumber": "^1.3.3",
+    "protractor": "^5.4.1",
+    "serenity-cli": "^0.11.1",
+    "serenity-js": "^1.10.13",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.1.3"
+  }
+}
