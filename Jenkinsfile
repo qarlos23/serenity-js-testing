@@ -1,6 +1,7 @@
 def label = "worker-${UUID.randomUUID().toString()}"
 
 podTemplate(label: label, containers: [
+   containerTemplate(name: 'jnlp', image: 'lachlanevenson/jnlp-slave:3.10-1-alpine', args: '${computer.jnlpmac} ${computer.name}', workingDir: '/home/jenkins', resourceRequestCpu: '200m', resourceLimitCpu: '300m', resourceRequestMemory: '256Mi', resourceLimitMemory: '512Mi'),
   containerTemplate(name: 'selenium-server', image: 'selenium/standalone-chrome', args: '-d -p 4444:4444 -v /dev/shm:/dev/shm', command: 'cat', ttyEnabled: true),
   containerTemplate(name: 'node', image: 'node:10.14.1-alpine', command: 'cat', ttyEnabled: true),
   containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true),
