@@ -1,6 +1,6 @@
 def label = "worker-${UUID.randomUUID().toString()}"
 
-podTemplate(label: test, containers: [
+podTemplate(label: label, containers: [
   containerTemplate(name: 'selenium-server', image: 'selenium/standalone-chrome', args: '-d -p 4444:4444 -v /dev/shm:/dev/shm', command: 'cat', ttyEnabled: true),
   containerTemplate(name: 'node', image: 'node:10.14.1-alpine', command: 'cat', ttyEnabled: true),
   containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true),
@@ -10,7 +10,7 @@ podTemplate(label: test, containers: [
 volumes: [
   hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')
 ]) {
-  node(test) {
+  node(label) {
     def myRepo = checkout scm
     def gitCommit = myRepo.GIT_COMMIT
     def gitBranch = myRepo.GIT_BRANCH
