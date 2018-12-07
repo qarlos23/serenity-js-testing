@@ -2,7 +2,7 @@ def label = "worker-${UUID.randomUUID().toString()}"
 
 podTemplate(label: test, containers: [
   containerTemplate(name: 'selenium-server', image: 'selenium/standalone-chrome', args: '-d -p 4444:4444 -v /dev/shm:/dev/shm', command: 'cat', ttyEnabled: true),
-  containerTemplate(name: 'node', image: 'node:10.14.1-alpine', command: 'cat', ttyEnabled: true)
+  containerTemplate(name: 'node', image: 'node:10.14.1-alpine', command: 'cat', ttyEnabled: true),
   containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true),
   containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.8.8', command: 'cat', ttyEnabled: true),
   containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-helm:latest', command: 'cat', ttyEnabled: true)
