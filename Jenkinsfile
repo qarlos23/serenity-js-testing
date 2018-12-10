@@ -11,31 +11,47 @@ metadata:
 spec:
   containers:
     - name: jnlp
-    image: jenkins/jnlp-slave
-    tty: true
-    securityContext:
-      runAsUser: 1000
-      allowPrivilegeEscalation: false
-    - name: jenkins
-      image: jenkins/jenkins
+      image: jenkins/jnlp-slave
+      tty: true
+      securityContext:
+        runAsUser: 1000
+        allowPrivilegeEscalation: false
+      volumeMounts:
+        - mountPath: /var/run/docker.sock
+          name: docker-sock
+    - name: selenium-server
+      image: selenium/standalone-chrome
+      tty: true
+      ports:
+        - containerPort: 4444
+      securityContext:
+       runAsUser: 1000
+       allowPrivilegeEscalation: false
+      volumeMounts:
+        - mountPath: /var/run/docker.sock
+          name: docker-sock
+        - mountPath: /dev/shm
+          name: selenium
+    - name: node
+      image: node:10.14.1-alpine
       tty: true
       securityContext:
        runAsUser: 1000
        allowPrivilegeEscalation: false
+      volumeMounts:
+        - mountPath: /var/run/docker.sock
+          name: docker-sock
+  volumes:
+    - name: docker-sock
+      hostPath:
+        path: /var/run/docker.sock
+        type: Directory
+    - name: selenium
+      hostPath:
+        path: /dev/shm
+        type: Directory
 """
-
-podTemplate(label: label, yaml: yaml, containers: [
-  //containerTemplate(name: 'jnlp', image: 'jenkinsci/jnlp-slave', args: '${computer.jnlpmac} ${computer.name}', workingDir: '/home/jenkins', resourceRequestCpu: '200m', resourceLimitCpu: '300m', resourceRequestMemory: '256Mi', resourceLimitMemory: '512Mi'),
-  containerTemplate(name: 'selenium-server', image: 'selenium/standalone-chrome', ports: [portMapping(name: 'selenium-hub', containerPort: 4444, hostPort: 4444)], command: 'cat', ttyEnabled: true),
-  containerTemplate(name: 'node', image: 'node:10.14.1-alpine', command: 'cat', ttyEnabled: true),
-  containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true),
-  containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.8.8', command: 'cat', ttyEnabled: true),
-  containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-helm:latest', command: 'cat', ttyEnabled: true)
-],
-volumes: [
-  hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
-  hostPathVolume(mountPath: '/dev/shm', hostPath: '/dev/shm')
-]) {
+podTemplate(label: label, yaml: yaml) {
   node(label) {
     def myRepo = checkout scm
     def gitCommit = myRepo.GIT_COMMIT
