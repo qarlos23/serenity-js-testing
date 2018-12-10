@@ -17,8 +17,8 @@ spec:
         runAsUser: 1000
         allowPrivilegeEscalation: false
       volumeMounts:
-      - mountPath: /var/run/docker.sock
-        name: docker-sock
+        - mountPath: /var/run/docker.sock
+          name: docker-sock
     - name: selenium-server
       image: selenium/standalone-chrome
       tty: true
@@ -41,7 +41,7 @@ spec:
       volumeMounts:
         - mountPath: /var/run/docker.sock
           name: docker-sock
-   volumes:
+  volumes:
     - name: docker-sock
       hostPath:
         path: /var/run/docker.sock
