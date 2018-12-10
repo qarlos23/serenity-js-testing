@@ -45,11 +45,9 @@ spec:
     - name: docker-sock
       hostPath:
         path: /var/run/docker.sock
-        type: DirectoryOrCreate
     - name: selenium
       hostPath:
         path: /dev/shm
-        type: DirectoryOrCreate
 """
 podTemplate(label: label, yaml: yaml) {
   node(label) {
