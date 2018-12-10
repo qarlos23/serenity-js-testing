@@ -4,6 +4,7 @@ exports.config = {
     // Framework definition - tells Protractor to use Serenity/JS
     framework: 'custom',
     frameworkPath: require.resolve('serenity-js'),
+    chromeOnly: true,
 
     specs: [ path.join(__dirname,'features/**/*.feature') ],
 
