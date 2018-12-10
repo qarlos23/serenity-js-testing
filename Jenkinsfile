@@ -56,8 +56,6 @@ podTemplate(label: label, yaml: yaml) {
         container('node') {
           sh """
             pwd
-            echo "GIT_BRANCH=${gitBranch}" >> /etc/environment
-            echo "GIT_COMMIT=${gitCommit}" >> /etc/environment
             npm install
             npm run e2e
             """
