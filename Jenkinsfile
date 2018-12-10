@@ -56,9 +56,8 @@ podTemplate(label: label, yaml: yaml) {
         container('node') {
           sh """
             pwd
-            ping selenium-server
-            #npm install
-            #npm run e2e
+            npm install
+            npm run e2e
             """
         }
       }

@@ -5,6 +5,8 @@ exports.config = {
     framework: 'custom',
     frameworkPath: require.resolve('serenity-js'),
     chromeOnly: true,
+    //Selenium
+    seleniumAddress: 'http://selenium-server:4444/wd/hub',
 
     specs: [ path.join(__dirname,'features/**/*.feature') ],
 
@@ -22,14 +24,13 @@ exports.config = {
 
         dialect: 'cucumber',  // or 'mocha'
 
-        //Selenium
-        //seleniumAddress: 'http://127.0.0.1:4444/wd/hub',
+        
         
         //browser
         multiCapabilities: [
             {
                 browserName: 'chrome',
-                seleniumAddress: 'http://127.0.0.1:4444/wd/hub',
+                //seleniumAddress: 'http://127.0.0.1:4444/wd/hub',
                 
                 // chromeOptions: {
                 //     args: [
