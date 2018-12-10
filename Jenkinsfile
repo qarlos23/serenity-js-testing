@@ -56,8 +56,9 @@ podTemplate(label: label, yaml: yaml) {
         container('node') {
           sh """
             pwd
-            npm install
-            npm run e2e
+            curl http://selenium-server:4444
+            #npm install
+            #npm run e2e
             """
         }
       }
