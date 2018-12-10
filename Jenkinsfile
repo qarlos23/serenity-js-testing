@@ -56,8 +56,7 @@ podTemplate(label: label, yaml: yaml) {
         container('node') {
           sh """
             pwd
-            apk add curl
-            curl http://selenium-server:4444
+            ping selenium-server
             #npm install
             #npm run e2e
             """
