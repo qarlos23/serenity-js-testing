@@ -16,6 +16,9 @@ spec:
       securityContext:
         runAsUser: 1000
         allowPrivilegeEscalation: false
+      volumeMounts:
+      - mountPath: /var/run/docker.sock
+        name: docker-sock
     - name: selenium-server
       image: selenium/standalone-chrome
       tty: true
@@ -25,6 +28,8 @@ spec:
        runAsUser: 1000
        allowPrivilegeEscalation: false
       volumeMounts:
+        - mountPath: /var/run/docker.sock
+          name: docker-sock
         - mountPath: /dev/shm
           name: selenium
     - name: node
@@ -33,15 +38,18 @@ spec:
       securityContext:
        runAsUser: 1000
        allowPrivilegeEscalation: false
-  volumes:
+      volumeMounts:
+        - mountPath: /var/run/docker.sock
+          name: docker-sock
+   volumes:
     - name: docker-sock
       hostPath:
         path: /var/run/docker.sock
-        type: Directory
+        type: DirectoryOrCreate
     - name: selenium
       hostPath:
         path: /dev/shm
-        type: Directory
+        type: DirectoryOrCreate
 """
 podTemplate(label: label, yaml: yaml) {
   node(label) {
