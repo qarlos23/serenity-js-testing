@@ -57,7 +57,7 @@ podTemplate(label: label, yaml: yaml) {
       }
     }
     stage('Test') {
-      try {
+      //try {
         container('node') {
           sh """
             pwd
@@ -65,11 +65,11 @@ podTemplate(label: label, yaml: yaml) {
             npm run e2e
             """
         }
-      }
-      catch (exc) {
-        println "Failed to test - ${currentBuild.fullDisplayName}"
-        throw(exc)
-      }
+      //}
+      //catch (exc) {
+      //  println "Failed to test - ${currentBuild.fullDisplayName}"
+      //  throw(exc)
+      //}
     }
     stage('Publish Results'){
         container('node'){
