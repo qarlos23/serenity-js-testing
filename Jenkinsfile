@@ -78,6 +78,15 @@ podTemplate(label: label, yaml: yaml) {
       }
       catch (exc) {
         println "Failed to test - ${currentBuild.fullDisplayName}"
+        // publish the Serenity report
+       publishHTML(target: [
+           reportName : 'Serenity',
+           reportDir:   'target/site/serenity',
+           reportFiles: 'index.html',
+           keepAll:     true,
+           alwaysLinkToLastBuild: true,
+           allowMissing: false
+       ])
         throw(exc)
       }
     }
