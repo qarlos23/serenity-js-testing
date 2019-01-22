@@ -57,7 +57,6 @@ podTemplate(label: label, yaml: yaml) {
           sh """
             pwd
             npm install
-            docker network inspect bridge
             npm run e2e
             """
         }
