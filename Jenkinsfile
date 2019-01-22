@@ -10,6 +10,12 @@ metadata:
     label: jnlp
 spec:
   containers:
+    - name: jnlp
+      image: jenkins/jnlp-slave
+      tty: true
+      securityContext:
+        runAsUser: 1000
+        allowPrivilegeEscalation: false
     - name: selenium-server
       image: selenium/standalone-chrome
       tty: true
