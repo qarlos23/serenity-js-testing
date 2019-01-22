@@ -21,6 +21,11 @@ spec:
       tty: true
       ports:
         - containerPort: 4444
+      env:
+        - name: HUB_PORT_4444_TCP_ADDR
+          value: localhost
+        - name: HUB_PORT_4444_TCP_PORT
+          value: 4444
       securityContext:
        runAsUser: 1000
        allowPrivilegeEscalation: false

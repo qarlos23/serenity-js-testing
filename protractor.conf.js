@@ -6,7 +6,7 @@ exports.config = {
     frameworkPath: require.resolve('serenity-js'),
     chromeOnly: true,
     //Selenium
-seleniumAddress: 'http://172.17.0.3:4444/wd/hub',
+seleniumAddress: 'http://localhost:4444/wd/hub',
 
     specs: [ path.join(__dirname,'features/**/*.feature') ],
 
