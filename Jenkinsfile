@@ -62,6 +62,7 @@ podTemplate(label: label, yaml: yaml) {
           sh """
             pwd
             npm install
+            npm run pretest
             npm run e2e
             """
         }
@@ -72,7 +73,12 @@ podTemplate(label: label, yaml: yaml) {
       }
     }
     stage('Publish Results'){
+
         container('node'){
+            sh """
+            pwd
+            npm run report
+            """
              // publish the Serenity report
                publishHTML(target: [
                    reportName : 'Serenity',

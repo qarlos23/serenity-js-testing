@@ -4,8 +4,10 @@
   "description": "project to try out serenity",
   "main": "index.js",
   "scripts": {
+    "pretest" : "serenity update",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "e2e": "webdriver-manager update && protractor ./protractor.conf.js"
+    "e2e": "webdriver-manager update && protractor ./protractor.conf.js",
+    "report": "serenity run"
   },
   "repository": {
     "type": "git",
