@@ -46,7 +46,7 @@ export = function login() {
     this.Given(/^.*that a registered user wants to login into the portal$/, () => {    
         browser.ignoreSynchronization = true;
         browser.get('https://portal-demo.zeiss.com', 60000);
-        browser.driver.manage().window().maximize();
+        //browser.driver.manage().window().maximize();
                  
     });
 
