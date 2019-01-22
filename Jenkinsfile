@@ -64,31 +64,25 @@ podTemplate(label: label, yaml: yaml) {
             npm install
             npm run e2e
             """
-
-           // publish the Serenity report
-           publishHTML(target: [
-               reportName : 'Serenity',
-               reportDir:   'target/site/serenity',
-               reportFiles: 'index.html',
-               keepAll:     true,
-               alwaysLinkToLastBuild: true,
-               allowMissing: false
-           ])
         }
       }
       catch (exc) {
         println "Failed to test - ${currentBuild.fullDisplayName}"
-        // publish the Serenity report
-       publishHTML(target: [
-           reportName : 'Serenity',
-           reportDir:   'target/site/serenity',
-           reportFiles: 'index.html',
-           keepAll:     true,
-           alwaysLinkToLastBuild: true,
-           allowMissing: false
-       ])
         throw(exc)
       }
+    }
+    stage('Publish Results'){
+        container('node'){
+             // publish the Serenity report
+               publishHTML(target: [
+                   reportName : 'Serenity',
+                   reportDir:   'target/site/serenity',
+                   reportFiles: 'index.html',
+                   keepAll:     true,
+                   alwaysLinkToLastBuild: true,
+                   allowMissing: false
+               ])
+        }
     }
   }
 }
