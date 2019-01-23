@@ -61,6 +61,7 @@ podTemplate(label: label, yaml: yaml) {
         container('node') {
           sh """
             pwd
+            apk --update add openjdk7-jre
             npm install
             npm run pretest
             npm run e2e
