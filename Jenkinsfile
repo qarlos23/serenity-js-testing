@@ -33,7 +33,7 @@ spec:
         - mountPath: /dev/shm
           name: selenium
     - name: node
-      image: nesneros/alpine-java-and-node
+      image: qarlos23/node:jdk8
       tty: true
       securityContext:
        runAsUser: 1000
