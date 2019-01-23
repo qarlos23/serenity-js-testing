@@ -33,7 +33,7 @@ spec:
         - mountPath: /dev/shm
           name: selenium
     - name: node
-      image: node:10.14.1-alpine
+      image: dmacedo/java-node-alpine
       tty: true
       securityContext:
        runAsUser: 1000
@@ -61,7 +61,6 @@ podTemplate(label: label, yaml: yaml) {
         container('node') {
           sh """
             pwd
-            apk --update add openjdk7-jre
             npm install
             npm run pretest
             npm run e2e
